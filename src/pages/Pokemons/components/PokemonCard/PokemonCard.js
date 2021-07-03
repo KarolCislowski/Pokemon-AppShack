@@ -44,7 +44,10 @@ export const PokemonCard = ({ url }) => {
       {pokemon &&
         <Card style={{ background: `${bg(pokemon?.types)}` }}>
           <h3>{pokemon?.name}</h3>
-          <img src={pokemon?.img} alt="poke-art" />
+          {pokemon.img ?
+            <img src={pokemon?.img} alt="" />
+            :
+            <h4>Sorry no photo :(</h4>}
         </Card>}
 
     </>
