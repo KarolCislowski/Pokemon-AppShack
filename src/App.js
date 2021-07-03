@@ -1,4 +1,5 @@
 import './App.css'
+import { Pokemons } from './pages/Pokemons/Pokemons'
 
 const App = () => {
   return (
@@ -6,6 +7,7 @@ const App = () => {
       <header className="App-header">
         Pokemon App
       </header>
+      <Pokemons />
     </div>
   )
 }
