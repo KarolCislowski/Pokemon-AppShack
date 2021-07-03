@@ -16,6 +16,9 @@ const Card = styled.article`
   cursor: pointer;
   text-decoration: none;
   text-transform: capitalize;
+    &:hover {
+      transform: scale(1.1);
+    }
 `
 
 export const PokemonCard = ({ url }) => {
