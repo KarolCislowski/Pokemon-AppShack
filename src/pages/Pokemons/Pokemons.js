@@ -1,5 +1,7 @@
 import { useEffect, useState } from "react"
 
+import { PokemonCard } from "./components/PokemonCard/PokemonCard"
+
 export const Pokemons = () => {
   const listUrl = `https://pokeapi.co/api/v2/pokemon/?limit=1118`
   const [pokemonsList, setPokemonsList] = useState([])
@@ -21,7 +23,7 @@ export const Pokemons = () => {
   return (
     <>
       {pokemonsList?.map((e) => (
-        <div>{e.name}</div>
+        <PokemonCard url={e.url} />
       ))}
     </>
   )
