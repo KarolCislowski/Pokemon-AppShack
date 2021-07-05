@@ -33,7 +33,7 @@ export const PokemonCard = ({ url }) => {
             name: data.name,
             id: data.id,
             types: data.types,
-            img: data.sprites.other['official-artwork'].front_default
+            img: data.sprites.other['official-artwork'].front_default,
           }
         )
       })
@@ -42,12 +42,12 @@ export const PokemonCard = ({ url }) => {
   return (
     <>
       {pokemon &&
-        <Card style={{ background: `${bg(pokemon?.types)}` }}>
-          <h3>{pokemon?.name}</h3>
+        <Card style={{ background: `${bg(pokemon.types)}` }}>
+          <h3>{pokemon.name}</h3>
           {pokemon.img ?
-            <img src={pokemon?.img} alt="" />
+            <img src={pokemon.img} alt="" />
             :
-            <h4>Sorry no photo :(</h4>}
+            <h4>Sorry no photo :{`(`}</h4>}
         </Card>}
 
     </>
