@@ -1,4 +1,5 @@
 import { useEffect, useState } from "react"
+import { Link } from "react-router-dom"
 import styled from "styled-components"
 
 import { bg } from "../../../../utils/bg"
@@ -42,14 +43,15 @@ export const PokemonCard = ({ url }) => {
   return (
     <>
       {pokemon &&
-        <Card style={{ background: `${bg(pokemon.types)}` }}>
-          <h3>{pokemon.name}</h3>
-          {pokemon.img ?
-            <img src={pokemon.img} alt="" />
-            :
-            <h4>Sorry no photo :{`(`}</h4>}
-        </Card>}
-
+        <Link to={`/${pokemon.name}`}>
+          <Card style={{ background: `${bg(pokemon.types)}` }}>
+            <h3>{pokemon.name}</h3>
+            {pokemon.img ?
+              <img src={pokemon.img} alt="" />
+              :
+              <h4>Sorry no photo :{`(`}</h4>}
+          </Card>
+        </Link>}
     </>
   )
 }
