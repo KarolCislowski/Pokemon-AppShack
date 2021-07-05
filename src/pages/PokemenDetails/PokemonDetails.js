@@ -68,12 +68,12 @@ export const PokemonDetails = () => {
           {pokemon.img ?
             <img src={pokemon.img} alt="" />
             :
-            <h4>Sorry no photo :{`(`}</h4>}
+            <h2>Sorry no photo :{`(`}</h2>}
           <Stats>
             <h1>{pokemon.name}</h1>
             <List>
               <Item>
-                <StatName>Number:</StatName>
+                <StatName>ID:</StatName>
                 <StatParam>{pokemon.id}</StatParam>
               </Item>
               <Item>
