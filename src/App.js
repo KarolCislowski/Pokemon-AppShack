@@ -1,14 +1,23 @@
 import './App.css'
+import { BrowserRouter as Router, Route, Switch } from 'react-router-dom'
+
 import { Pokemons } from './pages/Pokemons/Pokemons'
+import { PokemonDetails } from './pages/PokemenDetails/PokemonDetails'
 
 const App = () => {
   return (
-    <div className="App">
-      <header className="App-header">
-        Pokemon App
-      </header>
-      <Pokemons />
-    </div>
+    <>
+      <Router>
+        <Switch>
+          <Route path="/" exact>
+            <Pokemons />
+          </Route>
+          <Route path="/:pokemonName" exact>
+            <PokemonDetails />
+          </Route>
+        </Switch>
+      </Router>
+    </>
   )
 }
 
