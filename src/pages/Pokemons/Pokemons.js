@@ -1,4 +1,15 @@
 import { useEffect, useState } from "react"
+import styled from 'styled-components'
+
+import { PokemonCard } from "./components/PokemonCard/PokemonCard"
+
+const Main = styled.main`
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-around;
+  margin: 0 auto;
+  max-width: 1200px;
+`
 
 export const Pokemons = () => {
   const listUrl = `https://pokeapi.co/api/v2/pokemon/?limit=1118`
@@ -19,10 +30,10 @@ export const Pokemons = () => {
   }, [listUrl])
 
   return (
-    <>
+    <Main>
       {pokemonsList?.map((e) => (
-        <div>{e.name}</div>
+        <PokemonCard url={e.url} />
       ))}
-    </>
+    </Main>
   )
 }
