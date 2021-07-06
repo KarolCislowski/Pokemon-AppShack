@@ -9,16 +9,17 @@ const Card = styled.article`
   flex-direction: column;
   opacity: 0.6;
   width: 200px;
-  height: 250px;
+  min-height: 250px;
   padding: 20px;
   text-align: center;
   border: 2px solid steelblue;
   border-radius: 20px;
-  flex-grow:none;
+  flex-grow: none;
   margin: 15px;
   cursor: pointer;
   text-decoration: none;
   text-transform: capitalize;
+  overflow: hidden;
     &:hover {
       transform: scale(1.1);
     }
