@@ -48,6 +48,7 @@ export const Pokemons = () => {
       <Pagination
         pokePerPage={pokePerPage}
         totalPoke={pokemonsList.length}
+        currentPage={currentPage}
         paginate={paginate} />
     </Main>
   )
