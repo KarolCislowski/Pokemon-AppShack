@@ -17,7 +17,7 @@ export const Pokemons = () => {
   const listUrl = `https://pokeapi.co/api/v2/pokemon/?limit=1118`
   const { page } = useParams()
   const [pokemonsList, setPokemonsList] = useState([])
-  const [currentPage, setCurrentPage] = useState(page || 1)
+  const [currentPage, setCurrentPage] = useState(+page || 1)
   const [pokePerPage] = useState(20)
 
 
