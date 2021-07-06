@@ -1,4 +1,5 @@
 import styled from 'styled-components'
+import { Link } from 'react-router-dom'
 
 const Nav = styled.nav`
   width:100%;
@@ -7,7 +8,7 @@ const Nav = styled.nav`
   margin:15px;
 `
 
-const PageBtn = styled.a`
+const PageBtn = styled(Link)`
   display: flex;
   align-items: center;
   justify-content: center;
@@ -36,6 +37,9 @@ const PageBtn = styled.a`
   &:hover {
     transform: rotate(-45deg);
   }
+  &:visited {
+    color: #fff;
+  }
 `
 
 export const Pagination = ({ pokePerPage, totalPoke, currentPage, paginate }) => {
@@ -49,10 +53,10 @@ export const Pagination = ({ pokePerPage, totalPoke, currentPage, paginate }) =>
     <Nav>
       {pageNumbers.map(number => (
         <PageBtn
+          onClick={() => paginate(number)}
           className={number === currentPage ? 'active' : ''}
           key={number}
-          type='button'
-          onClick={() => paginate(number)}
+          to={`/page/${number}`}
         >
           {number}
         </PageBtn>

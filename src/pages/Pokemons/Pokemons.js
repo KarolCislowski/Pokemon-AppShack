@@ -1,4 +1,5 @@
 import { useEffect, useState } from "react"
+import { useParams } from "react-router-dom"
 import styled from 'styled-components'
 import { Pagination } from "./components/Pagination/Pagination"
 
@@ -14,9 +15,11 @@ const Main = styled.main`
 
 export const Pokemons = () => {
   const listUrl = `https://pokeapi.co/api/v2/pokemon/?limit=1118`
+  const { page } = useParams()
   const [pokemonsList, setPokemonsList] = useState([])
-  const [currentPage, setCurrentPage] = useState(1)
-  const [pokePerPage, setPokePerPage] = useState(20)
+  const [currentPage, setCurrentPage] = useState(page || 1)
+  const [pokePerPage] = useState(20)
+
 
   useEffect(() => {
     fetch(listUrl)
