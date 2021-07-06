@@ -1,5 +1,7 @@
 import { useEffect, useState } from "react"
+import { useParams } from "react-router-dom"
 import styled from 'styled-components'
+import { Pagination } from "./components/Pagination/Pagination"
 
 import { PokemonCard } from "./components/PokemonCard/PokemonCard"
 
@@ -13,7 +15,11 @@ const Main = styled.main`
 
 export const Pokemons = () => {
   const listUrl = `https://pokeapi.co/api/v2/pokemon/?limit=1118`
+  const { page } = useParams()
   const [pokemonsList, setPokemonsList] = useState([])
+  const [currentPage, setCurrentPage] = useState(+page || 1)
+  const [pokePerPage] = useState(20)
+
 
   useEffect(() => {
     fetch(listUrl)
@@ -29,11 +35,24 @@ export const Pokemons = () => {
       })
   }, [listUrl])
 
+  const lastPokeOnPage = currentPage * pokePerPage
+  const firstPokeOnPage = lastPokeOnPage - pokePerPage
+
+  const paginate = (number) => {
+    setCurrentPage(number)
+  }
+
   return (
     <Main>
-      {pokemonsList?.map((e) => (
-        <PokemonCard url={e.url} />
-      ))}
+      {pokemonsList?.slice(firstPokeOnPage, lastPokeOnPage)
+        .map((e) => (
+          <PokemonCard key={e.name} url={e.url} />
+        ))}
+      <Pagination
+        pokePerPage={pokePerPage}
+        totalPoke={pokemonsList.length}
+        currentPage={currentPage}
+        paginate={paginate} />
     </Main>
   )
 }

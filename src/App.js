@@ -9,6 +9,9 @@ const App = () => {
     <>
       <Router>
         <Switch>
+          <Route path="/page/:page" exact>
+            <Pokemons />
+          </Route>
           <Route path="/" exact>
             <Pokemons />
           </Route>
