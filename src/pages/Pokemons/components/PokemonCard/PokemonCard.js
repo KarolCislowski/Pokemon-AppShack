@@ -7,6 +7,7 @@ import { bg } from "../../../../utils/bg"
 const Card = styled.article`
   display: flex;
   flex-direction: column;
+  opacity: 0.6;
   width: 200px;
   height: 250px;
   padding: 20px;
