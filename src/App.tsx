@@ -2,7 +2,7 @@ import './App.css'
 import { BrowserRouter as Router, Route, Switch } from 'react-router-dom'
 
 import { Pokemons } from './pages/Pokemons/Pokemons'
-import { PokemonDetails } from './pages/PokemenDetails/PokemonDetails'
+import { PokemonDetails } from './pages/PokemonDetails/PokemonDetails'
 
 const App = () => {
   return (
