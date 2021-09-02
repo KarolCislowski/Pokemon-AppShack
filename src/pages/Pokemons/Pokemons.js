@@ -14,6 +14,13 @@ const Main = styled.main`
 `
 
 export const Pokemons = () => {
+
+  /*  Our client asked us to build application which will list all pokemons sorted by name.
+      Unfortunately pokeApi has no sorting functions so we need to fetch full list of 1118 Pokemon species
+      and sort it on our end.
+      For the same reason we can't use APIs built in pagination system, because it is achieved by offsetting and limiting the list of pokemons listed by ID not by name.
+      In the future it probably will be achievable because pokeAPI is working on their GraphQL version, and features like sorting and filtering are built in the Graph engine. */
+
   const listUrl = `https://pokeapi.co/api/v2/pokemon/?limit=1118`
   const { page } = useParams()
   const [pokemonsList, setPokemonsList] = useState([])
