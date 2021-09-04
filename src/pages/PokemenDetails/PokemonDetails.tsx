@@ -1,8 +1,9 @@
-import { useState, useEffect } from "react"
-import { useParams } from "react-router-dom"
+import { useState, useEffect } from 'react'
+import { useParams } from 'react-router-dom'
 import styled from 'styled-components'
+import { Pokemon } from '../../types'
 
-import { bg } from "../../utils/bg"
+import { bg } from '../../utils/bg'
 
 const Main = styled.main`
   width: 100%;
@@ -30,7 +31,7 @@ const List = styled.ul`
 `
 
 const Item = styled.li`
-  display:flex;
+  display: flex;
   justify-content: space-between;
 `
 
@@ -43,12 +44,12 @@ const StatParam = styled.span`
 `
 
 export const PokemonDetails = () => {
-  const [pokemon, setPokemon] = useState()
-  const { pokemonName } = useParams()
+  const [pokemon, setPokemon] = useState<Pokemon | null>()
+  const { pokemonName } = useParams<{ pokemonName: string }>()
 
   useEffect(() => {
     fetch(`https://pokeapi.co/api/v2/pokemon/${pokemonName.toLowerCase()}`)
-      .then((res) => (res.json()))
+      .then((res) => res.json())
       .then((data) => {
         setPokemon({
           name: data.name,
@@ -56,19 +57,20 @@ export const PokemonDetails = () => {
           types: data.types,
           img: data.sprites.other['official-artwork'].front_default,
           abilities: data.abilities,
-          stats: data.stats
+          stats: data.stats,
         })
       })
   }, [pokemonName])
 
   return (
     <>
-      {pokemon &&
+      {pokemon && (
         <Main style={{ background: `${bg(pokemon.types)}` }}>
-          {pokemon.img ?
+          {pokemon.img ? (
             <img src={pokemon.img} alt="" />
-            :
-            <h2>Sorry no photo :{`(`}</h2>}
+          ) : (
+            <h2>Sorry no photo :{`(`}</h2>
+          )}
           <Stats>
             <h1>{pokemon.name}</h1>
             <List>
@@ -79,30 +81,37 @@ export const PokemonDetails = () => {
               <Item>
                 <StatName>Type:</StatName>
                 <StatParam>
-                  {pokemon.types.map((e, index, arr) =>
-                    <>{(index + 1) < arr.length ? `${e.type.name}, ` : `${e.type.name}`}</>
-                  )}
+                  {pokemon.types.map((e, index, arr) => (
+                    <>
+                      {index + 1 < arr.length
+                        ? `${e.type.name}, `
+                        : `${e.type.name}`}
+                    </>
+                  ))}
                 </StatParam>
               </Item>
-              {pokemon.stats.map((e) =>
+              {pokemon.stats?.map((e) => (
                 <Item>
                   <StatName>{e.stat.name}:</StatName>
                   <StatParam>{e.base_stat}</StatParam>
                 </Item>
-              )}
+              ))}
               <Item>
                 <StatName>Abilities:</StatName>
                 <StatParam>
-                  {pokemon.abilities.map((e, index, arr) =>
-                    <>{(index + 1) < arr.length ? `${e.ability.name}, ` : `${e.ability.name}`}</>
-                  )}
+                  {pokemon.abilities?.map((e, index, arr) => (
+                    <>
+                      {index + 1 < arr.length
+                        ? `${e.ability.name}, `
+                        : `${e.ability.name}`}
+                    </>
+                  ))}
                 </StatParam>
               </Item>
             </List>
           </Stats>
         </Main>
-      }
+      )}
     </>
   )
-
 }

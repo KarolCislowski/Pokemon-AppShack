@@ -53,3 +53,11 @@ export interface Pokemon {
   abilities?: Array<Ability>
   stats?: Array<Stat>
 }
+
+export interface TypeListItem {
+  name: string
+  url: string
+}
+
+export type TypeList = Array<TypeListItem>
+
