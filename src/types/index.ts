@@ -1,3 +1,5 @@
+import { Type } from "typescript"
+
 export interface PokeType {
   type: {
     name: string
@@ -52,4 +54,18 @@ export interface Pokemon {
   img: string
   abilities?: Array<Ability>
   stats?: Array<Stat>
+}
+
+export interface TypeListItem {
+  name: string
+  url: string
+}
+
+export type TypeList = Array<TypeListItem>
+
+export interface pokeType {
+  super: TypeList
+  resistant: TypeList
+  notEffective: TypeList
+  weak: TypeList
 }
