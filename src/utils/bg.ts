@@ -1,5 +1,7 @@
-export const bg = (types) => {
-  const typeColors =
+import { PokeType, TypesOptions } from '../types'
+
+export const bg = (types: Array<PokeType>): string => {
+  const typeColors: TypesOptions =
   {
     normal: "RGBA(168,168,120,1)",
     fighting: "RGBA(192,48,40,1)",
@@ -22,12 +24,12 @@ export const bg = (types) => {
   }
 
   if (types.length === 1) {
-    return typeColors[types[0]?.type.name]
+    return typeColors[types[0]?.type.name as keyof TypesOptions]
   } else {
     return `linear-gradient(
-      50deg, ${typeColors[types[0]?.type.name]} 0%,
-      ${typeColors[types[0]?.type.name]} 40%,
-      ${typeColors[types[1]?.type.name]}60%,
-      ${typeColors[types[1]?.type.name]} 100%)`
+      50deg, ${typeColors[types[0]?.type.name as keyof TypesOptions]} 0%,
+      ${typeColors[types[0]?.type.name as keyof TypesOptions]} 40%,
+      ${typeColors[types[1]?.type.name as keyof TypesOptions]}60%,
+      ${typeColors[types[1]?.type.name as keyof TypesOptions]} 100%)`
   }
 }
