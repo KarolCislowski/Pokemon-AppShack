@@ -1,5 +1,6 @@
 import { useEffect, useState } from 'react'
 import styled from 'styled-components'
+import { ErrorPage } from '../../components/Error/Error'
 import { Loading } from '../../components/Loading/Loading'
 import { TypeList } from '../../types'
 import { TypeCard } from './components/TypeCard/TypeCard'
@@ -15,6 +16,7 @@ const Main = styled.main`
 
 export const TypeChart = () => {
   const [typeList, setTypeList] = useState<TypeList>([])
+  const [error, setError] = useState<boolean>(false)
   const [loading, setLoading] = useState<boolean>(false)
 
   useEffect(() => {
@@ -26,12 +28,18 @@ export const TypeChart = () => {
         setTypeList(data.results)
         setLoading(false)
       })
+      .catch(() => {
+        setError(true)
+        setLoading(false)
+      })
   }, [])
 
   return (
     <>
       {loading ? (
         <Loading />
+      ) : error ? (
+        <ErrorPage />
       ) : (
         <Main>
           {typeList
