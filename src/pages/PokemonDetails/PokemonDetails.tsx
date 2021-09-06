@@ -1,6 +1,7 @@
 import { useState, useEffect } from 'react'
 import { useParams } from 'react-router-dom'
 import styled from 'styled-components'
+import { ErrorPage } from '../../components/Error/Error'
 import { Loading } from '../../components/Loading/Loading'
 import { Pokemon } from '../../types'
 
@@ -46,6 +47,7 @@ const StatParam = styled.span`
 
 export const PokemonDetails = () => {
   const [pokemon, setPokemon] = useState<Pokemon | null>()
+  const [error, setError] = useState<boolean>(false)
   const [loading, setLoading] = useState<boolean>(false)
   const { pokemonName } = useParams<{ pokemonName: string }>()
 
@@ -64,12 +66,18 @@ export const PokemonDetails = () => {
         })
         setLoading(false)
       })
+      .catch(() => {
+        setError(true)
+        setLoading(false)
+      })
   }, [pokemonName])
 
   return (
     <>
       {loading ? (
         <Loading />
+      ) : error ? (
+        <ErrorPage />
       ) : (
         <>
           {pokemon && (
