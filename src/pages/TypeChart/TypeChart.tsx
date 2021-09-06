@@ -1,5 +1,6 @@
 import { useEffect, useState } from 'react'
 import styled from 'styled-components'
+import { Loading } from '../../components/Loading/Loading'
 import { TypeList } from '../../types'
 import { TypeCard } from './components/TypeCard/TypeCard'
 
@@ -14,20 +15,32 @@ const Main = styled.main`
 
 export const TypeChart = () => {
   const [typeList, setTypeList] = useState<TypeList>([])
+  const [loading, setLoading] = useState<boolean>(false)
 
   useEffect(() => {
+    setLoading(true)
+
     fetch('https://pokeapi.co/api/v2/type')
       .then((res) => res.json())
-      .then((data) => setTypeList(data.results))
+      .then((data) => {
+        setTypeList(data.results)
+        setLoading(false)
+      })
   }, [])
 
   return (
-    <Main>
-      {typeList
-        ?.filter((e) => e.name !== 'unknown' && e.name !== 'shadow')
-        .map((type) => (
-          <TypeCard name={type.name} key={type.name} url={type.url} />
-        ))}
-    </Main>
+    <>
+      {loading ? (
+        <Loading />
+      ) : (
+        <Main>
+          {typeList
+            ?.filter((e) => e.name !== 'unknown' && e.name !== 'shadow')
+            .map((type) => (
+              <TypeCard name={type.name} key={type.name} url={type.url} />
+            ))}
+        </Main>
+      )}
+    </>
   )
 }

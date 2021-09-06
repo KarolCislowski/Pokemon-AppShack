@@ -1,6 +1,7 @@
 import { useEffect, useState } from 'react'
 import { useParams } from 'react-router-dom'
 import styled from 'styled-components'
+import { Loading } from '../../components/Loading/Loading'
 import { PokemonList } from '../../types'
 import { Pagination } from './components/Pagination/Pagination'
 import { PokemonCard } from './components/PokemonCard/PokemonCard'
@@ -25,8 +26,10 @@ export const Pokemons = () => {
   const [pokemonsList, setPokemonsList] = useState<PokemonList>([])
   const [currentPage, setCurrentPage] = useState<number>(+page || 1)
   const [pokePerPage] = useState(20)
+  const [loading, setLoading] = useState<boolean>(false)
 
   useEffect(() => {
+    setLoading(true)
     fetch(listUrl)
       .then((res) => res.json())
       .then((data) => {
@@ -41,6 +44,7 @@ export const Pokemons = () => {
             return 0
           })
         )
+        setLoading(false)
       })
   }, [listUrl])
 
@@ -52,16 +56,22 @@ export const Pokemons = () => {
   }
 
   return (
-    <Main>
-      {pokemonsList?.slice(firstPokeOnPage, lastPokeOnPage).map((e) => (
-        <PokemonCard key={e.name} url={e.url} />
-      ))}
-      <Pagination
-        pokePerPage={pokePerPage}
-        totalPoke={pokemonsList.length}
-        currentPage={currentPage}
-        paginate={paginate}
-      />
-    </Main>
+    <>
+      {loading ? (
+        <Loading />
+      ) : (
+        <Main>
+          {pokemonsList?.slice(firstPokeOnPage, lastPokeOnPage).map((e) => (
+            <PokemonCard key={e.name} url={e.url} />
+          ))}
+          <Pagination
+            pokePerPage={pokePerPage}
+            totalPoke={pokemonsList.length}
+            currentPage={currentPage}
+            paginate={paginate}
+          />
+        </Main>
+      )}
+    </>
   )
 }
