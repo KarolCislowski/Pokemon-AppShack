@@ -21,12 +21,6 @@ const Main = styled.main`
   justify-content: flex-start;
 `
 
-const Img = styled.img`
-  min-height: 100px;
-  max-height: 50%;
-  height: auto;
-`
-
 const Stats = styled.article`
   margin: 20px auto;
   max-width: 600px;
@@ -96,7 +90,7 @@ export const PokemonDetails = () => {
             <Main>
               <GoBack />
               {pokemon.img ? (
-                <Img src={pokemon.img} alt="" />
+                <img src={pokemon.img} alt="" />
               ) : (
                 <h2>Sorry no photo :{`(`}</h2>
               )}
