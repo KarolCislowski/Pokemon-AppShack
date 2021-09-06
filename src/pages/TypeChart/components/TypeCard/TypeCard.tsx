@@ -1,25 +1,8 @@
 import { useEffect, useState } from 'react'
-import styled from 'styled-components'
 import { pokeType } from '../../../../types'
 import { bg } from '../../../../utils/bg'
 import { DamageRangeTab } from './DamageRangeTab/DamageRangeTab'
-
-const Card = styled.div`
-  display: flex;
-  flex-direction: column;
-  border: solid 1px black;
-`
-
-const Headline = styled.h1`
-  color: white;
-  font-size: 2rem;
-  padding: 10px;
-  text-transform: capitalize;
-`
-
-const CardBodyLine = styled.div`
-  display: flex;
-`
+import { Card, CardBodyLine, Headline } from './TypeCard.ui'
 
 type TypeProps = {
   name: string

@@ -1,19 +1,11 @@
 import { useEffect, useState } from 'react'
 import { useParams } from 'react-router-dom'
-import styled from 'styled-components'
 import { Loading } from '../../components/Loading/Loading'
 import { ErrorPage } from '../../components/Error/Error'
 import { PokemonList } from '../../types'
 import { Pagination } from './components/Pagination/Pagination'
 import { PokemonCard } from './components/PokemonCard/PokemonCard'
-
-const Main = styled.main`
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: space-around;
-  margin: 0 auto;
-  max-width: 1200px;
-`
+import { Main } from './Pokemons.ui'
 
 export const Pokemons = () => {
   /*  Our client asked us to build application which will list all pokemons sorted by name.
