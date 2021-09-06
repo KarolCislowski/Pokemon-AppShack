@@ -2,18 +2,29 @@ import { useState, useEffect } from 'react'
 import { useParams } from 'react-router-dom'
 import styled from 'styled-components'
 import { ErrorPage } from '../../components/Error/Error'
+import { GoBack } from '../../components/GoBack/GoBack'
 import { Loading } from '../../components/Loading/Loading'
 import { Pokemon } from '../../types'
 
 import { bg } from '../../utils/bg'
 
 const Main = styled.main`
-  width: 100%;
+  margin: 0 auto;
   height: 100vh;
+  max-width: 1200px;
   display: flex;
+  overflow: visible;
   flex-direction: column;
   align-content: center;
   text-align: center;
+  background-size: cover;
+  justify-content: flex-start;
+`
+
+const Img = styled.img`
+  min-height: 100px;
+  max-height: 50%;
+  height: auto;
 `
 
 const Stats = styled.article`
@@ -26,6 +37,7 @@ const Stats = styled.article`
   display: flex;
   flex-direction: column;
   text-transform: capitalize;
+  box-shadow: black 2px 2px 12px 0px;
 `
 
 const List = styled.ul`
@@ -81,13 +93,14 @@ export const PokemonDetails = () => {
       ) : (
         <>
           {pokemon && (
-            <Main style={{ background: `${bg(pokemon.types)}` }}>
+            <Main>
+              <GoBack />
               {pokemon.img ? (
-                <img src={pokemon.img} alt="" />
+                <Img src={pokemon.img} alt="" />
               ) : (
                 <h2>Sorry no photo :{`(`}</h2>
               )}
-              <Stats>
+              <Stats style={{ background: `${bg(pokemon.types)}` }}>
                 <h1>{pokemon.name}</h1>
                 <List>
                   <Item>

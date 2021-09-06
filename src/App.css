@@ -33,6 +33,7 @@ h1 {
   font-size: 4rem;
   color: #c31a1a;
   text-align: center;
+  text-shadow: black 2px 2px 12px;
 }
 
 h2 {
