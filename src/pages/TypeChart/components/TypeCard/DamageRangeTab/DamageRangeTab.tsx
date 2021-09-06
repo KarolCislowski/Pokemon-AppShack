@@ -34,6 +34,7 @@ const TypePill = styled.p`
   padding: 5px 10px;
   border-radius: 10%;
   margin: 5px;
+  box-shadow: black 2px 2px 2px;
 `
 
 type DamageProps = {
