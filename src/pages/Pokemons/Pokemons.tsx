@@ -5,7 +5,7 @@ import { ErrorPage } from '../../components/Error/Error'
 import { PokemonList } from '../../types'
 import { Pagination } from './components/Pagination/Pagination'
 import { PokemonCard } from './components/PokemonCard/PokemonCard'
-import { Main } from './Pokemons.ui'
+import { FilteringBar, Main, SearchInput } from './Pokemons.ui'
 
 export const Pokemons = () => {
   /*  Our client asked us to build application which will list all pokemons sorted by name.
@@ -21,6 +21,7 @@ export const Pokemons = () => {
   const [pokePerPage] = useState(20)
   const [loading, setLoading] = useState<boolean>(false)
   const [error, setError] = useState<boolean>(false)
+  const [filter, setFilter] = useState<string>('')
 
   useEffect(() => {
     setLoading(true)
@@ -53,6 +54,10 @@ export const Pokemons = () => {
     setCurrentPage(number)
   }
 
+  const filteredPokemons = pokemonsList?.filter((e) =>
+    e.name.includes(filter.toLocaleLowerCase())
+  )
+
   return (
     <>
       {loading ? (
@@ -61,15 +66,26 @@ export const Pokemons = () => {
         <ErrorPage />
       ) : (
         <Main>
-          {pokemonsList?.slice(firstPokeOnPage, lastPokeOnPage).map((e) => (
+          <FilteringBar>
+            <label>
+              Find the Pokemon by name:
+              <SearchInput
+                type="text"
+                onChange={(e) => setFilter(e.target.value)}
+              />
+            </label>
+          </FilteringBar>
+          {filteredPokemons.slice(firstPokeOnPage, lastPokeOnPage).map((e) => (
             <PokemonCard key={e.name} url={e.url} />
           ))}
-          <Pagination
-            pokePerPage={pokePerPage}
-            totalPoke={pokemonsList.length}
-            currentPage={currentPage}
-            paginate={paginate}
-          />
+          {filteredPokemons.length > pokePerPage && (
+            <Pagination
+              pokePerPage={pokePerPage}
+              totalPoke={filteredPokemons.length}
+              currentPage={currentPage}
+              paginate={paginate}
+            />
+          )}
         </Main>
       )}
     </>
