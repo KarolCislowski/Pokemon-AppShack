@@ -68,7 +68,7 @@ export const Pokemons = () => {
         <Main>
           <FilteringBar>
             <label>
-              Find Pokemon by name:
+              Find the Pokemon by name:
               <SearchInput
                 type="text"
                 onChange={(e) => setFilter(e.target.value)}

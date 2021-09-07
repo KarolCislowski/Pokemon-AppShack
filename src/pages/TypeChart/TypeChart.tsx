@@ -40,7 +40,7 @@ export const TypeChart = () => {
         <Main>
           <FilteringBar>
             <label>
-              Find type:
+              Find the type:
               <SearchInput
                 type="text"
                 onChange={(e) => setFilter(e.target.value)}
