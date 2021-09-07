@@ -21,7 +21,7 @@ export const Pokemons = () => {
   const [pokePerPage] = useState(20)
   const [loading, setLoading] = useState<boolean>(false)
   const [error, setError] = useState<boolean>(false)
-  const [filter, setFilter] = useState<string>('mega')
+  const [filter, setFilter] = useState<string>('')
 
   useEffect(() => {
     setLoading(true)
